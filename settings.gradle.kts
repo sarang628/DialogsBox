@@ -19,7 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Main"        // 루트 프로젝트 정의
+rootProject.name = "DialogBox"        // 루트 프로젝트 정의
 include(":app")     // 하위 프로젝트 1
-include(":library") // 하위 프로젝트 2
 include(":library")
