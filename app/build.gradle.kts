@@ -15,6 +15,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner = "com.sarang.torang.CustomTestRunner"
     }
+    buildFeatures {
+        compose = true
+    }
 
     android.buildFeatures.buildConfig = true
 
@@ -41,9 +44,6 @@ android {
         }
     }
 
-    buildFeatures {
-        compose = true
-    }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtension.get()
     }
@@ -61,17 +61,8 @@ android {
 dependencies {
     /** HILT */
     implementation(libs.hilt)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
     kapt(libs.hilt.compiler)
     implementation(libs.hilt.nav.compose) // hiltViewModel
-
-    /** GOOGLE MAP */
-    implementation("com.google.android.gms:play-services-maps:18.1.0")
-    implementation("com.google.android.gms:play-services-location:21.0.1")
-    implementation("com.google.maps.android:maps-compose-utils:2.11.2")
 
     /** Retrofit */
     implementation(libs.retrofit)
@@ -116,7 +107,6 @@ dependencies {
     implementation(libs.nav.compose)
     androidTestImplementation(libs.x.ui.test.junit4) //runTest
     debugImplementation(libs.x.ui.test.manifest) // Needed for createAndroidComposeRule, but not createComposeRule:
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 
     /** Navigation start */
     // Kotlin
@@ -133,5 +123,6 @@ dependencies {
     implementation(libs.nav.compose)
     /** Navigation end */
 
-    implementation(project(":library"))
+    implementation(libs.torangRepository)
+    implementation(libs.theme)
 }
