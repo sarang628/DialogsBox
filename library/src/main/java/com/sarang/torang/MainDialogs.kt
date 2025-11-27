@@ -27,7 +27,6 @@ fun MainDialogs(
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
 
-
         if (uiState.showShare) {
             LocalShareBottomSheet.current.invoke { uiState.mainDialogEvent.onCloseShare() }
         }
