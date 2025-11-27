@@ -125,6 +125,15 @@ dependencies {
 
     implementation(libs.torangRepository)
     implementation(libs.theme)
+    implementation(libs.torangBottomSheet)
+    implementation(libs.torangdatabase)
+    implementation(libs.torangnetwork)
+    implementation(libs.comment)
+    implementation(libs.commonImageLoader)
+    implementation(libs.report)
+
+    implementation(libs.constraintlayout.compose)
+    implementation(libs.coil)
 
     implementation(project(":library"))
 }
