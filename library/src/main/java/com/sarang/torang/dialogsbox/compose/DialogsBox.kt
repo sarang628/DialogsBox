@@ -1,4 +1,4 @@
-package com.sarang.torang
+package com.sarang.torang.dialogsbox.compose
 
 import android.util.Log
 import androidx.compose.foundation.layout.Box
@@ -10,6 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.sarang.torang.dialogsbox.compose.type.LocalCommentBottomSheet
+import com.sarang.torang.dialogsbox.compose.type.LocalMenuBottomSheet
+import com.sarang.torang.dialogsbox.compose.type.LocalReportBottomSheet
+import com.sarang.torang.dialogsbox.compose.type.LocalRestaurantBottomSheet
+import com.sarang.torang.dialogsbox.compose.type.LocalShareBottomSheet
+import com.sarang.torang.dialogsbox.compose.type.MenuBottomSheetType
+import com.sarang.torang.dialogsbox.compose.type.MenuBottomSheetTypeData
 
 /**
  * 메인 다이얼로그
@@ -21,8 +28,8 @@ import androidx.compose.ui.unit.sp
  */
 @Preview
 @Composable
-fun MainDialogs(
-    uiState                 : MainDialogUiState                                  = MainDialogUiState(),
+fun DialogsBox(
+    uiState                 : MainDialogUiState = MainDialogUiState(),
     onEdit                  : (Int) -> Unit                                      = {},
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
@@ -32,7 +39,7 @@ fun MainDialogs(
         }
 
         uiState.showReport?.let {
-            LocalReportBottomSheetType.current(it, uiState.mainDialogEvent.closeReport)
+            LocalReportBottomSheet.current(it, uiState.mainDialogEvent.closeReport)
         }
 
         uiState.deleteReview?.let {
@@ -56,9 +63,10 @@ fun MainDialogs(
         uiState.showMenu?.let {
             Log.d("__MainDialogs", "showMenu reviewId: $it")
             LocalMenuBottomSheet.current.invoke(
-                it, uiState.mainDialogEvent.onCloseMenu,
-                uiState.mainDialogEvent.onReport,
-                uiState.mainDialogEvent.onDeleteMenu, onEdit
+                MenuBottomSheetTypeData(reviewId = it,
+                                             onClose = uiState.mainDialogEvent.onCloseMenu,
+                                             onReport = uiState.mainDialogEvent.onReport,
+                                             onDelete = uiState.mainDialogEvent.onDeleteMenu, onEdit)
             )
         }
 

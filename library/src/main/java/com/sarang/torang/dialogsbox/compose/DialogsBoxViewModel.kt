@@ -1,8 +1,9 @@
-package com.sarang.torang
+package com.sarang.torang.dialogsbox.compose
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sarang.torang.dialogsbox.usecase.DeleteReviewUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FeedDialogsViewModel @Inject constructor(
+class DialogsBoxViewModel @Inject constructor(
     private val deleteReviewUseCase: DeleteReviewUseCase,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(MainDialogUiState(mainDialogEvent = mainDialogEvent()))

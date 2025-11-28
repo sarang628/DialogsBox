@@ -1,4 +1,4 @@
-package com.sarang.torang
+package com.sarang.torang.dialogsbox.compose
 
 data class MainDialogUiState(
     val showShare: Boolean = false,
