@@ -4,9 +4,12 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sarang.torang.dialogsbox.usecase.DeleteReviewUseCase
+import com.sarang.torang.dialogsbox.usecase.IsLoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,8 +17,13 @@ import javax.inject.Inject
 @HiltViewModel
 class DialogsBoxViewModel @Inject constructor(
     private val deleteReviewUseCase: DeleteReviewUseCase,
+    private val isLoginUseCase: IsLoginUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(MainDialogUiState(mainDialogEvent = mainDialogEvent()))
+
+    private val isLogin = isLoginUseCase.invoke().stateIn(scope = viewModelScope,
+                                                          initialValue = false,
+                                                          started = SharingStarted.WhileSubscribed(5000))
     val uiState = _uiState.asStateFlow()
 
     fun onComment(reviewId: Int) {
@@ -28,7 +36,11 @@ class DialogsBoxViewModel @Inject constructor(
     }
 
     fun onShare(it: Int) {
-        _uiState.update { it.copy(showShare = true) }
+        if(isLogin.value) {
+            _uiState.update { it.copy(showShare = true) }
+        }else{
+            throw Exception("로그인 해주세요.")
+        }
     }
 
     fun closeComment() {
