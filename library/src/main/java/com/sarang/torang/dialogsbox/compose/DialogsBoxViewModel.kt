@@ -21,9 +21,9 @@ class DialogsBoxViewModel @Inject constructor(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(MainDialogUiState(mainDialogEvent = mainDialogEvent()))
 
-    private val isLogin = isLoginUseCase.invoke().stateIn(scope = viewModelScope,
-                                                          initialValue = false,
-                                                          started = SharingStarted.WhileSubscribed(5000))
+    val isLogin = isLoginUseCase.invoke().stateIn(scope = viewModelScope,
+                                                  initialValue = false,
+                                                  started = SharingStarted.WhileSubscribed(5000))
     val uiState = _uiState.asStateFlow()
 
     fun onComment(reviewId: Int) {
