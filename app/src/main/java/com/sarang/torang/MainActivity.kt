@@ -18,7 +18,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.sarang.torang.di.dialogsbox_di.ProvideMainDialog
+import com.sarang.torang.di.dialogsbox_di.ProvideDialogsBox
 import com.sarang.torang.dialogsbox.compose.DialogsBoxViewModel
 import com.sarang.torang.ui.theme.DialogsBoxTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
             DialogsBoxTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(Modifier.padding(innerPadding)){
-                        ProvideMainDialog(
+                        ProvideDialogsBox(
                             dialogsViewModel = dialogsBoxViewModel
                         ){
                             FlowRow {
