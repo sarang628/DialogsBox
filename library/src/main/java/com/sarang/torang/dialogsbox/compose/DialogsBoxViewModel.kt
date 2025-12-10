@@ -23,7 +23,7 @@ class DialogsBoxViewModel @Inject constructor(
 
     val isLogin = isLoginUseCase.invoke().stateIn(scope = viewModelScope,
                                                   initialValue = false,
-                                                  started = SharingStarted.WhileSubscribed(5000))
+                                                  started = SharingStarted.Eagerly)
     val uiState = _uiState.asStateFlow()
 
     fun onComment(reviewId: Int) {
